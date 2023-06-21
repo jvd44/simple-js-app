@@ -17,6 +17,11 @@ let pokemonList = [
 ];
 
 
+pokemonList.forEach(function(pokemon) {
+    document.write("<p>" + pokemon.name + " " + `(height: ${pokemon.height}")` + "  </p>")
+});
+
+/*
 for (let i = 0; i < pokemonList.length; i++){
     document.write(`<p>${pokemonList[i].name + " " }`)
     document.write(`(height: ${pokemonList[i].height}")` + " ")
@@ -24,4 +29,4 @@ for (let i = 0; i < pokemonList.length; i++){
         document.write(`Wow, that's big!` + " ");
     }
 };
-
+*/
