@@ -46,8 +46,8 @@ let pokemonRepository = (function () { //Wrap array in IIFE
             showDetails(pokemon);
         });
     };
-
-    function showDetails(pokemon) {
+ 
+    function showDetails(pokemon) {  //logs pokemon in console when button clicked
         console.log(pokemon);
     };
 
