@@ -1,0 +1,13 @@
+.button-class {
+  background-color: blue;
+  color: white;
+  border: none;
+  border: 2px solid;
+  cursor: pointer;
+  padding: 16px 32px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+border-color: yellow;
+}

@@ -4,35 +4,71 @@ let pokemonRepository = (function () { //Wrap array in IIFE
         {
         name: 'Bulbasaur',
         height: 0.7,
-        type: ['grass','poison']
+        types: ['grass','poison']
         }, 
         {
         name: 'Charmander',
         height: 0.6,
-        type: 'fire',
+        types: 'fire',
         }, 
         {
         name: 'Squirtle',
         height: 0.5,
-        type: 'water',
+        types: 'water',
         }
     ]
+
     function getAll () {//returns all pokemon in pokemonList array
         return pokemonList;
     }
+
     function add (pokemon) {//adds pokemon to pokemon array
+        if (
+            typeof pokemon === "object" &&
+            "name" in pokemon &&
+            "height" in pokemon &&
+            "types" in pokemon
+        ) {
         pokemonList.push(pokemon);
+         } else {
+        console.log('Pokemon is not correct');
+        }
     }
+    function addListItem (pokemon){/*creates pokemon list in the form of stylized buttons*/
+        let pokemonList = document.querySelector('.pokemon-list');
+        let listPokemon = document.createElement('li');
+        let button = document.createElement('button');
+        button.innerText = pokemon.name;
+        button.classList.add('button-class');
+        listPokemon.appendChild(button);
+        pokemonList.appendChild(listPokemon);
+        button.addEventListener('click', function () {
+            showDetails(pokemon);
+        });
+    };
+
+    function showDetails(pokemon) {
+        console.log(pokemon);
+    };
+
     return { // returns functions to be used outside IIFE
         getAll: getAll,
-        add: add
-    }
-})();
+        add: add,
+        addListItem: addListItem
+        };
+    })();
+
+pokemonRepository.add({name: "Pikachu", height: 0.3, types: ["electric"] });
 
 pokemonRepository.getAll().forEach(function(pokemon) {
-    document.write("<p>" + pokemon.name + " " + `(height: ${pokemon.height}")` + "  </p>")
+   pokemonRepository.addListItem(pokemon);
 });
-/*
+
+
+
+
+
+/*  Orignal for loop---Displaying pokemon array
 for (let i = 0; i < pokemonList.length; i++){
     document.write(`<p>${pokemonList[i].name + " " }`)
     document.write(`(height: ${pokemonList[i].height}")` + " ")
