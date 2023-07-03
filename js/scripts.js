@@ -32,7 +32,7 @@ let pokemonRepository = (function () { //Wrap array in IIFE
  
     
 
-    function loadList() {
+    function loadList() { //Loads pokemon list from pokedex API
         return fetch(apiUrl).then(function (response) {
           return response.json();
         }).then(function (json) {
@@ -49,7 +49,7 @@ let pokemonRepository = (function () { //Wrap array in IIFE
         })
       }
 
-      function loadDetails(item) {
+      function loadDetails(item) { //loads and displays pokemon details from pokedex API
         let url = item.detailsUrl;
         return fetch(url).then(function (response) {
           return response.json();
