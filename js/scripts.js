@@ -1,5 +1,5 @@
 let pokemonRepository = (function () { //Wrap array in IIFE
-
+  let modalContainer = document.querySelector('#modal-container');
     let pokemonList = [];
     let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
@@ -62,11 +62,52 @@ let pokemonRepository = (function () { //Wrap array in IIFE
           console.error(e);
         });
       }
+
     function showDetails(pokemon) {  //logs pokemon details in console when button clicked
         loadDetails(pokemon).then(function () {
-            console.log(pokemon);
+          console.log(pokemon);
+        })
+          function showModal() {
+            let modal = document.createElement('div');
+            modal.classList.add('modal');
+
+            let closeButtonElement = document.createElement('button');
+            closeButtonElement.classList.add('modal-close');
+            closeButtonElement.innerText = 'Close';
+            closeButtonElement.addEventListener('click', hideModal);
+
+            let titleElement = document.createElement('h1');
+            titleElement.innerText = pokemon.name;
+
+            let contentElement = document.createElement('p');
+            contentElement.innerText = pokemon.height;
+
+            modal.appendChild(closeButtonElement);
+            modal.appendChild(titleElement);
+            modal.appendChild(contentElement);
+            modalContainer.appendChild(modal);
+
+            modalContainer.classList.add('is-visible');
+        }
+    
+          function hideModal () {
+            let modelContainer = document.querySelector('#model-container');
+            modelContainer.classList.remove('is-visible');
+          };
+
+         window.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && modalContainer.classList.contains('is-visible')) {
+            hideModal();
+          }
         });
-    };
+
+        modalContainer.addEventListener('click', (e) => {
+        let target =e.target;
+          if (target === modalContainer) {
+          hideModal(pokemon.name, pokemon.height);
+        }
+        });
+      }
 
     return { // returns functions to be used outside IIFE
         add: add,
