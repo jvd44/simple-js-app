@@ -34,6 +34,17 @@ border-color: yellow;
   text-align: center;
 }
 
+.modal {
+  margin: auto;
+  display: inline-block;
+  box-sizing: border-box;
+  background: #fff;
+  padding: 15px;
+  width: 100%;
+  max-width: 700px;
+  text-align: left;
+}
+
 .model-close {
   float: right;
   border: 0;
@@ -41,4 +52,12 @@ border-color: yellow;
   color: #777;
   text-decoration: underline;
 
+}
+
+.modal h1 {
+  margin-top: 0;
+}
+
+.modal p {
+  margin-bottom: 0;
 }
