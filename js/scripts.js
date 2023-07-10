@@ -30,7 +30,34 @@ let pokemonRepository = (function () { //Wrap array in IIFE
         });
     };
  
-    
+    function showModal(pokemon) {
+      let modalContainer = document.querySelector('.modal-container');
+      let modal = document.createElement('div');
+      modal.classList.add('modal');
+
+      let closeButtonElement = document.createElement('button');
+      closeButtonElement.classList.add('modal-close');
+      closeButtonElement.innerText = 'Close';
+      closeButtonElement.addEventListener('click', hideModal);
+
+      let titleElement = document.createElement('h1');
+      titleElement.innerText = pokemon;
+
+      let contentElement = document.createElement('p');
+      contentElement.innerText = pokemon;
+
+      modal.appendChild(closeButtonElement);
+      modal.appendChild(titleElement);
+      modal.appendChild(contentElement);
+      modalContainer.appendChild(modal);
+
+      modalContainer.classList.add('is-visible');
+  }
+
+    function hideModal () {
+      let modelContainer = document.querySelector('#model-container');
+      modelContainer.classList.remove('is-visible');
+    }; 
 
     function loadList() { //Loads pokemon list from pokedex API
         return fetch(apiUrl).then(function (response) {
@@ -51,6 +78,7 @@ let pokemonRepository = (function () { //Wrap array in IIFE
 
       function loadDetails(item) { //loads and displays pokemon details from pokedex API
         let url = item.detailsUrl;
+        showModal();
         return fetch(url).then(function (response) {
           return response.json();
         }).then(function (details) {
@@ -67,7 +95,8 @@ let pokemonRepository = (function () { //Wrap array in IIFE
         loadDetails(pokemon).then(function () {
           console.log(pokemon);
         })
-          function showModal() {
+          function showModal(pokemon) {
+            let modalContainer = document.querySelector('.modal-container');
             let modal = document.createElement('div');
             modal.classList.add('modal');
 
@@ -100,14 +129,14 @@ let pokemonRepository = (function () { //Wrap array in IIFE
             hideModal();
           }
         });
-
-        modalContainer.addEventListener('click', (e) => {
+      }
+        /*modalContainer.addEventListener('click', (e) => {
         let target =e.target;
           if (target === modalContainer) {
           hideModal(pokemon.name, pokemon.height);
         }
         });
-      }
+      }*/
 
     return { // returns functions to be used outside IIFE
         add: add,
@@ -118,7 +147,7 @@ let pokemonRepository = (function () { //Wrap array in IIFE
         showDetails: showDetails
         };
     })();
-
+  
 pokemonRepository.loadList().then(function() {
     pokemonRepository.getAll().forEach(function (pokemon) {
         pokemonRepository.addListItem(pokemon);
